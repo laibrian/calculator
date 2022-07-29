@@ -45,6 +45,22 @@ function displayNumber(number) {
     calculatorDisplay.textContent = `${displayedNumber}`;
 }
 
+function clear() {
+    displayedNumber = "";
+    displayNumber(displayedNumber);
+}
+
+// user clicks for operation
+// add function
+
+// subtract function
+
+// UI multiply function
+
+// divide function
+
+// equal/operate function
+
 // UI
 const calculatorDisplay = document.querySelector('#display');
 const oneBtn = document.querySelector('#one');
@@ -57,6 +73,7 @@ const sevenBtn = document.querySelector('#seven');
 const eightBtn = document.querySelector('#eight');
 const nineBtn = document.querySelector('#nine');
 const zeroBtn = document.querySelector('#zero');
+const clearBtn = document.querySelector('#clear');
 
 oneBtn.addEventListener('click', () => {
     displayNumber("1");
@@ -96,4 +113,8 @@ nineBtn.addEventListener('click', () => {
 
 zeroBtn.addEventListener('click', () => {
     displayNumber("0");
+});
+
+clearBtn.addEventListener('click', () => {
+    clear();
 });
