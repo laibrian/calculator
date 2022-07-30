@@ -1,41 +1,37 @@
 // basic math operators
-// add
 function add(a, b) {
-    console.log("result at add: " + (a+b));
     return a + b;
 }
 
-// subtract
 function subtract(a, b) {
     return a - b;
 }
 
-// multiply
 function multiply(a, b) {
     return a * b;
 }
 
-// divide
 function divide(a, b) {
     return a / b;
 }
 
 // operation
 function operate(operator, a, b) {
-    if (operator === "+") {
-        return add(a, b);
-    }
+    a = Number(a);
+    b = Number(b);
 
-    if (operator === "-") {
-        return subtract(a, b);
-    }
-
-    if (operator === "*") {
-        return multiply(a, b);
-    }
-
-    if (operator === "/") {
-        return divide(a, b);
+    switch (operator) {
+        case '+':
+            return add(a, b);
+        case '-':
+            return add(a, b);
+        case '×':
+            return add(a, b);
+        case '÷':
+            if (b === 0) return null;
+            return divide(a, b);
+        default:
+            return null;  
     }
 }
 
@@ -44,21 +40,16 @@ let firstNumber;
 let secondNumber;
 let currentOperator;
 let isOperatorSelected = false;
+let isOperationDone = false;
 
 function displayNumber(number) {
     displayedNumber += number;
     calculatorDisplay.textContent = `${displayedNumber}`;
 }
 
-// convert number string to number type
-function convertNumStr(displayedNumber) {
-    converted = Number(displayedNumber);
-    console.log("converted " + converted);
-    return converted;
-}
-
 function clear() {
     isOperatorSelected = false;
+    isOperationDone = true;
     displayedNumber = "";
     displayNumber(displayedNumber);
 }
@@ -132,23 +123,25 @@ zeroBtn.addEventListener('click', () => {
     displayNumber("0");
 });
 
-clearBtn.addEventListener('click', () => {
-    clear();
-});
-
-equalBtn.addEventListener('click', () => {
-    if (isOperatorSelected) {
-        secondNumber = convertNumStr(displayedNumber);
-        let result = operate(currentOperator, firstNumber, secondNumber);
-        displayNumber(result);
-        console.log("result at operate: " + result);
-        isOperatorSelected = false;
-    }
-    return;
-});
+clearBtn.addEventListener('click', clear());
+equalBtn.addEventListener('click', operate());
 
 addBtn.addEventListener('click', () => {
-    firstNumber = convertNumStr(displayedNumber);
     currentOperator = "+";
+    isOperatorSelected = true;
+});
+
+subtractBtn.addEventListener('click', () => {
+    currentOperator = "-";
+    isOperatorSelected = true;
+});
+
+multiplyBtn.addEventListener('click', () => {
+    currentOperator = "*";
+    isOperatorSelected = true;
+});
+
+divideBtn.addEventListener('click', () => {
+    currentOperator = "/";
     isOperatorSelected = true;
 });
