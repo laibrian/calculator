@@ -1,3 +1,59 @@
+let currentOperator = null;
+let firstOperand = '';
+let secondOperand = '';
+let isScreenClearable = false;
+
+const display = document.getElementById('display');
+const digitButtons = document.querySelectorAll('.digit');
+const operatorButtons = document.querySelectorAll('.operator');
+const equalButton = document.getElementById('equalBtn');
+const clearButton = document.getElementById('clearBtn')
+
+digitButtons.forEach((button) =>
+    button.addEventListener('click', () => addDigit(button.textContent))
+);
+
+operatorButtons.forEach((button) =>
+    button.addEventListener('click', () => setOperator(button.textContent))
+);
+
+clearButton.addEventListener('click', clear);
+
+function addDigit(digit) {
+    if (display.textContent === '0') resetDisplay();
+    display.textContent += digit;
+}
+
+function setOperator(operator) {
+    if (currentOperator !== null) operate();
+    firstOperand = display.textContent;
+    currentOperator = operator;
+    isScreenClearable = true;
+}
+
+function completeOperation() {
+    if (currentOperator === null || isScreenClearable) return;
+    if (currentOperator === '÷' && display.textContent === '0') {
+        alert("ERROR! Cannot divide by 0!");
+        return;
+    }
+    secondOperand = display.textContent;
+    display.textContent = operate(currentOperator, firstOperand, secondOperand)
+    currentOperator = null;
+}
+
+function resetDisplay() {
+    display.textContent = '';
+}
+
+function clear() {
+    display.textContent = '0';
+    currentOperator = null;
+    firstOperand = '';
+    secondOperand = '';
+    isScreenClearable = false;
+}
+
 // basic math operators
 function add(a, b) {
     return a + b;
@@ -34,99 +90,3 @@ function operate(operator, a, b) {
             return null;  
     }
 }
-
-let displayedNumber = "";
-let firstNumber;
-let secondNumber;
-let currentOperator;
-let isOperatorSelected = false;
-let isOperationDone = false;
-
-function displayNumber(number) {
-    displayedNumber += number;
-    calculatorDisplay.textContent = `${displayedNumber}`;
-}
-
-function clear() {
-    isOperatorSelected = false;
-    isOperationDone = true;
-    displayedNumber = "";
-    displayNumber(displayedNumber);
-}
-
-// UI
-const calculatorDisplay = document.querySelector('#display');
-const calculatorButtons = document.querySelectorAll('.button');
-
-oneBtn.addEventListener('click', () => {
-    if (isOperatorSelected) displayedNumber = "";
-    displayNumber("1");
-});
-
-twoBtn.addEventListener('click', () => {
-    if (isOperatorSelected) displayedNumber = "";
-    displayNumber("2");
-});
-
-threeBtn.addEventListener('click', () => {
-    if (isOperatorSelected) displayedNumber = "";
-    displayNumber("3");
-});
-
-fourBtn.addEventListener('click', () => {
-    if (isOperatorSelected) displayedNumber = "";
-    displayNumber("4");
-});
-
-fiveBtn.addEventListener('click', () => {
-    if (isOperatorSelected) displayedNumber = "";
-    displayNumber("5");
-});
-
-sixBtn.addEventListener('click', () => {
-    if (isOperatorSelected) displayedNumber = "";
-    displayNumber("6");
-});
-
-sevenBtn.addEventListener('click', () => {
-    if (isOperatorSelected) displayedNumber = "";
-    displayNumber("7");
-});
-
-eightBtn.addEventListener('click', () => {
-    if (isOperatorSelected) displayedNumber = "";
-    displayNumber("8");
-});
-
-nineBtn.addEventListener('click', () => {
-    if (isOperatorSelected) displayedNumber = "";
-    displayNumber("9");
-});
-
-zeroBtn.addEventListener('click', () => {
-    if (isOperatorSelected) displayedNumber = "";
-    displayNumber("0");
-});
-
-clearBtn.addEventListener('click', clear());
-equalBtn.addEventListener('click', operate());
-
-addBtn.addEventListener('click', () => {
-    currentOperator = "+";
-    isOperatorSelected = true;
-});
-
-subtractBtn.addEventListener('click', () => {
-    currentOperator = "-";
-    isOperatorSelected = true;
-});
-
-multiplyBtn.addEventListener('click', () => {
-    currentOperator = "*";
-    isOperatorSelected = true;
-});
-
-divideBtn.addEventListener('click', () => {
-    currentOperator = "/";
-    isOperatorSelected = true;
-});
