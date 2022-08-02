@@ -18,6 +18,7 @@ operatorButtons.forEach((button) =>
     button.addEventListener('click', () => setOperator(button.textContent))
 );
 
+equalButton.addEventListener('click', completeOperation);
 clearButton.addEventListener('click', clear);
 deleteButton.addEventListener('click', deleteDigit);
 
@@ -27,7 +28,7 @@ function addDigit(digit) {
 }
 
 function setOperator(operator) {
-    if (currentOperator !== null) operate();
+    if (currentOperator !== null) completeOperation();
     firstOperand = display.textContent;
     currentOperator = operator;
     isScreenClearable = true;
@@ -40,12 +41,16 @@ function completeOperation() {
         return;
     }
     secondOperand = display.textContent;
-    display.textContent = operate(currentOperator, firstOperand, secondOperand)
+    console.log("First Op " + firstOperand);
+    console.log("Second Op " + secondOperand);
+    console.log(typeof(secondOperand));
+    display.textContent = operate(currentOperator, firstOperand, secondOperand);
     currentOperator = null;
 }
 
 function resetDisplay() {
     display.textContent = '';
+    isScreenClearable = false;
 }
 
 function deleteDigit() {
@@ -86,9 +91,9 @@ function operate(operator, a, b) {
         case '+':
             return add(a, b);
         case '-':
-            return add(a, b);
+            return subtract(a, b);
         case '×':
-            return add(a, b);
+            return multiply(a, b);
         case '÷':
             if (b === 0) return null;
             return divide(a, b);
