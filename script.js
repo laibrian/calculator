@@ -9,6 +9,7 @@ const operatorButtons = document.querySelectorAll('.operator');
 const equalButton = document.getElementById('equalBtn');
 const clearButton = document.getElementById('clearBtn');
 const deleteButton = document.getElementById('deleteBtn');
+const decimalButton = document.getElementById('decimalBtn');
 
 digitButtons.forEach((button) =>
     button.addEventListener('click', () => addDigit(button.textContent))
@@ -21,14 +22,27 @@ operatorButtons.forEach((button) =>
 equalButton.addEventListener('click', completeOperation);
 clearButton.addEventListener('click', clear);
 deleteButton.addEventListener('click', deleteDigit);
+decimalButton.addEventListener('click', addDecimal);
 
 function addDigit(digit) {
     if (display.textContent === '0' || isScreenClearable) resetDisplay();
+    
     display.textContent += digit;
+}
+
+function addDecimal() {
+    if (isScreenClearable) resetDisplay();
+
+    if (display.textContent.includes('.')) return;  // prevent adding another decimal if already exists
+
+    if (display.textContent === '') display.textContent = '0';  // add '0.' to display if nothing on display
+    
+    display.textContent += '.';
 }
 
 function setOperator(operator) {
     if (currentOperator !== null) completeOperation();
+
     firstOperand = display.textContent;
     currentOperator = operator;
     isScreenClearable = true;
@@ -36,18 +50,25 @@ function setOperator(operator) {
 
 function completeOperation() {
     if (currentOperator === null || isScreenClearable) return;
+
     if (currentOperator === '÷' && display.textContent === '0') {
         alert("ERROR! Cannot divide by 0!");
         return;
     }
+
     secondOperand = display.textContent;
     console.log("First Op " + firstOperand);
     console.log("Second Op " + secondOperand);
     console.log(typeof(secondOperand));
-    display.textContent = operate(currentOperator, firstOperand, secondOperand);
+    display.textContent = roundResult(operate(currentOperator, firstOperand, secondOperand));
     currentOperator = null;
 }
 
+function roundResult(result) {
+    return Math.round(result * 1000) / 1000;
+}
+
+// reset display whenever a new number is entered after operator selected
 function resetDisplay() {
     display.textContent = '';
     isScreenClearable = false;
