@@ -7,7 +7,8 @@ const display = document.getElementById('display');
 const digitButtons = document.querySelectorAll('.digit');
 const operatorButtons = document.querySelectorAll('.operator');
 const equalButton = document.getElementById('equalBtn');
-const clearButton = document.getElementById('clearBtn')
+const clearButton = document.getElementById('clearBtn');
+const deleteButton = document.getElementById('deleteBtn');
 
 digitButtons.forEach((button) =>
     button.addEventListener('click', () => addDigit(button.textContent))
@@ -18,9 +19,10 @@ operatorButtons.forEach((button) =>
 );
 
 clearButton.addEventListener('click', clear);
+deleteButton.addEventListener('click', deleteDigit);
 
 function addDigit(digit) {
-    if (display.textContent === '0') resetDisplay();
+    if (display.textContent === '0' || isScreenClearable) resetDisplay();
     display.textContent += digit;
 }
 
@@ -44,6 +46,10 @@ function completeOperation() {
 
 function resetDisplay() {
     display.textContent = '';
+}
+
+function deleteDigit() {
+    display.textContent = display.textContent.toString().slice(0, -1);
 }
 
 function clear() {
@@ -71,7 +77,7 @@ function divide(a, b) {
     return a / b;
 }
 
-// operation
+// determine what to operate
 function operate(operator, a, b) {
     a = Number(a);
     b = Number(b);
