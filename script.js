@@ -57,9 +57,6 @@ function completeOperation() {
     }
 
     secondOperand = display.textContent;
-    console.log("First Op " + firstOperand);
-    console.log("Second Op " + secondOperand);
-    console.log(typeof(secondOperand));
     display.textContent = roundResult(operate(currentOperator, firstOperand, secondOperand));
     currentOperator = null;
 }
