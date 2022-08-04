@@ -42,7 +42,9 @@ button {
 }
 
 .calc-buttons {
-    
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 10px;
 }
 
 #clearBtn {
