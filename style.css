@@ -4,6 +4,15 @@ body {
     margin-bottom: 50px;
 }
 
+button {
+    border-radius: 5px;
+    border: 1px solid;
+}
+
+.title, .footer {
+    text-align: center;
+}
+
 .main {
     display: flex;
     align-items: center;
@@ -11,9 +20,23 @@ body {
     margin-top: 30px;
 }
 
+#display {
+    background-color: #FFFFFF;
+    border: 2px solid #607EAA;
+    border-radius: 20px;
+    display: flex;
+    justify-content: flex-end;
+    height: 50px;
+    padding: 10px 25px 5px;
+}
+
 .calculator {
     background-color: #B7CADB;
     border: 2px solid #607EAA;
-    border-radius: 25px;
+    border-radius: 20px;
     padding: 20px;
+}
+
+.calc-buttons {
+    margin-top: 20px;
 }
