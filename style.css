@@ -6,7 +6,9 @@ body {
 
 button {
     border-radius: 5px;
-    border: 1px solid;
+    border: 2px solid #607EAA;
+    padding: 10px;
+    gap: 10px;
 }
 
 .title, .footer {
@@ -23,20 +25,38 @@ button {
 #display {
     background-color: #FFFFFF;
     border: 2px solid #607EAA;
-    border-radius: 20px;
+    border-radius: 10px;
     display: flex;
     justify-content: flex-end;
     height: 50px;
-    padding: 10px 25px 5px;
+    padding: 10px 25px;
+    font-size: 50px;
+    margin-bottom: 20px;
 }
 
 .calculator {
     background-color: #B7CADB;
     border: 2px solid #607EAA;
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 20px;
 }
 
 .calc-buttons {
-    margin-top: 20px;
+    
+}
+
+#clearBtn {
+    background-color: #EB1D36;
+}
+
+#deleteBtn {
+    background-color: #3AB0FF;
+}
+
+.digit, .decimal {
+    background-color: #EAE3D2;
+}
+
+.operator {
+    background-color: #F66B0E;
 }
